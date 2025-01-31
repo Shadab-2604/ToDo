@@ -45,6 +45,11 @@ function displayTodos(todos) {
     });
 }
 
+function reloadPage() {
+    window.location.reload();
+}
+
+
 async function addTodo() {
     const input = document.getElementById('todoInput');
     const text = input.value.trim();
