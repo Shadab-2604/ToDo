@@ -46,3 +46,9 @@ li {
     text-decoration: line-through;
     color: #888;
 }
+
+.error-message {
+    color: #ff0000;
+    margin-bottom: 10px;
+    display: none;
+}
