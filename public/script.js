@@ -30,8 +30,9 @@ function displayTodos(todos) {
     
     todos.forEach(todo => {
         const li = document.createElement('li');
+        li.classList.add(todo.completed ? 'completed' : ''); // Ternary class assignment
         li.innerHTML = `
-            <div class="${todo.completed ? 'completed' : ''}">
+            <div>
                 <input type="checkbox" ${todo.completed ? 'checked' : ''} 
                        onchange="toggleTodo('${todo._id}', this.checked)">
                 <span>${todo.text}</span>
@@ -71,7 +72,7 @@ async function addTodo() {
         const data = await response.json();
         console.log('Added todo:', data);
         input.value = '';
-        fetchTodos();
+        fetchTodos();  // Refetch todos after adding
     } catch (error) {
         console.error('Error adding todo:', error);
         showError(error.message);
@@ -92,7 +93,7 @@ async function toggleTodo(id, completed) {
             throw new Error('Failed to update todo');
         }
 
-        fetchTodos();
+        fetchTodos();  // Refetch todos after toggling
     } catch (error) {
         console.error('Error toggling todo:', error);
         showError('Failed to update todo');
@@ -116,7 +117,7 @@ async function editTodo(id, currentText) {
             throw new Error('Failed to update todo');
         }
 
-        fetchTodos();
+        fetchTodos();  // Refetch todos after editing
     } catch (error) {
         console.error('Error editing todo:', error);
         showError('Failed to update todo');
@@ -135,7 +136,7 @@ async function deleteTodo(id) {
             throw new Error('Failed to delete todo');
         }
 
-        fetchTodos();
+        fetchTodos();  // Refetch todos after deleting
     } catch (error) {
         console.error('Error deleting todo:', error);
         showError('Failed to delete todo');
@@ -143,4 +144,4 @@ async function deleteTodo(id) {
 }
 
 // Initial load
-fetchTodos();
+document.addEventListener('DOMContentLoaded', fetchTodos);
